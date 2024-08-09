@@ -1,1 +1,182 @@
-<p>employ-form works!</p>
+<div class="form-wrapper">
+  <p>employ-form works!</p>
+  <mat-card appearance="outlined">
+    <div class="card-content">
+      <div>
+        <h6>EmployeeForm</h6>
+      </div>
+      <form [formGroup]="empform" (ngSubmit)="onFormSubsmit()" class="my-form">
+        <div mat-dialog-content class="content">
+          <div class="first-row">
+            <div class="row">
+              <mat-form-field appearance="outline" class="example-form-field">
+                <mat-label>TaxPayerType</mat-label>
+                <mat-select formControlName="taxpayertype">
+                  @for (taxpayertype of taxpayertypes; track taxpayertype) {
+                  <mat-option [value]="taxpayertype.value">{{
+                    taxpayertype.viewValue
+                  }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>TIN</mat-label>
+                <input matInput formControlName="tin" type="number" />
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>FolderNumber</mat-label>
+                <input matInput formControlName="foldernumber" type="number" />
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>AssesmentType</mat-label>
+                <mat-select formControlName="assesmenttype">
+                  @for (assesmentype of assesementtypes; track assesmentype) {
+                  <mat-option [value]="assesmentype.value">{{
+                    assesmentype.viewValue
+                  }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <app-image-uploader />
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>FirstName</mat-label>
+              <input matInput formControlName="firstname" type="text" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>MiddleName</mat-label>
+              <input matInput formControlName="middlename" type="text" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>LastName</mat-label>
+              <input matInput formControlName="lastname" type="text" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>FirstName(English)</mat-label>
+              <input matInput formControlName="fnenglish" type="text" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="dob" />
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Gender</mat-label>
+              <mat-select formControlName="gender">
+                @for (gender of genders; track gender) {
+                <mat-option [value]="gender.value">{{
+                  gender.viewValue
+                }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Citizenship</mat-label>
+              <mat-select formControlName="citizen">
+                @for (citizen of citizenships; track citizen) {
+                <mat-option [value]="citizen.value"
+                  >{{ citizen.viewValue }}
+                </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Choose a date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker1"
+                formControlName="regdate"
+              />
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker1"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Catagory</mat-label>
+              <mat-select formControlName="catagory">
+                @for (cata of catagories; track cata) {
+                <mat-option [value]="cata.value"
+                  >{{ cata.viewValue }}
+                </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="status">
+                @for (stat of statuses; track stat) {
+                <mat-option [value]="stat.value"
+                  >{{ stat.viewValue }}
+                </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Region</mat-label>
+              <mat-select
+                (selectionChange)="onRegionSelectionChange($event)"
+                formControlName="region"
+              >
+                @for (reg of rigons; track reg) {
+                <mat-option [value]="reg.value"
+                  >{{ reg.viewValue }}
+                </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>City</mat-label>
+              <mat-select formControlName="city">
+                @for (cit of cities; track cit) {
+                <mat-option [value]="cit.value"
+                  >{{ cit.viewValue }}
+                </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Woreda</mat-label>
+              <mat-select formControlName="woreda">
+                @for (wor of woredas; track wor) {
+                <mat-option [value]="wor.value"
+                  >{{ wor.viewValue }}
+                </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Kebele</mat-label>
+              <mat-select formControlName="kebele">
+                @for (keb of kebeles; track keb) {
+                <mat-option [value]="keb.value"
+                  >{{ keb.viewValue }}
+                </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="row"></div>
+        </div>
+        <div mat-dialog-action>
+          <button mat-raised-button color="primary">Cancel</button>
+          <button mat-raised-button type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </mat-card>
+</div>
