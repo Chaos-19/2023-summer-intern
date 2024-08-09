@@ -22,7 +22,7 @@
   display: flex;
   flex-direction: column;
 
-  gap: 30px;
+  gap: 10px;
 }
 .row,
 .first-row {
@@ -36,5 +36,5 @@
 
 .first-row {
   flex-wrap: nowrap;
-  align-items: end;
+  align-items: center;
 }

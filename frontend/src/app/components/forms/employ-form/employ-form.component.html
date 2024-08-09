@@ -22,10 +22,12 @@
                 <mat-label>TIN</mat-label>
                 <input matInput formControlName="tin" type="number" />
               </mat-form-field>
+              <!--
               <mat-form-field appearance="outline">
                 <mat-label>FolderNumber</mat-label>
                 <input matInput formControlName="foldernumber" type="number" />
               </mat-form-field>
+              -->
               <mat-form-field appearance="outline">
                 <mat-label>AssesmentType</mat-label>
                 <mat-select formControlName="assesmenttype">
@@ -52,10 +54,12 @@
               <mat-label>LastName</mat-label>
               <input matInput formControlName="lastname" type="text" />
             </mat-form-field>
+            <!--
             <mat-form-field appearance="outline">
-              <mat-label>FirstName(English)</mat-label>
-              <input matInput formControlName="fnenglish" type="text" />
-            </mat-form-field>
+               <mat-label>FirstName(English)</mat-label>
+               <input matInput formControlName="fnenglish" type="text" />
+             </mat-form-field>
+            -->
             <mat-form-field appearance="outline">
               <mat-label>Choose a date</mat-label>
               <input matInput [matDatepicker]="picker" formControlName="dob" />
