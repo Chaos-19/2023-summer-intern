@@ -130,5 +130,18 @@ export class EmployFormComponent {
 
   onRegionSelectionChange(event: MatSelectChange) {
     console.log(event.value); // This will log the value of the selected item.
+
+    this.cities = Array.from({ length: 10 }).map((v) => ({
+      value: event.value,
+      viewValue: event.value,
+    })) as InputType[];
+    this.woredas = Array.from({ length: 10 }).map((v) => ({
+      value: event.value,
+      viewValue: event.value,
+    })) as InputType[];
+    this.kebeles = Array.from({ length: 10 }).map((v) => ({
+      value: event.value,
+      viewValue: event.value,
+    })) as InputType[];
   }
 }
