@@ -1,0 +1,40 @@
+{
+  "TaxPayer": [
+    {
+      "taxpayerType": "individual",
+      "tin": 123456789,
+      "assesmentType": "hisamezgeb",
+      "firstName": "John",
+      "middleName": "Michael",
+      "lastName": "Doe",
+      "dateOfBirth": "1980-05-15T00:00:00",
+      "gender": "male",
+      "citizen": "Ethiopian",
+      "registrationDate": "2023-01-10T00:00:00",
+      "category": "Category A",
+      "status": "Active",
+      "region": "Addis Ababa",
+      "city": "Addis Ababa",
+      "woreda": "02",
+      "kebele": "03"
+    },
+    {
+      "taxpayerType": "company",
+      "tin": 987654321,
+      "assesmentType": "kurtGiber",
+      "firstName": "ABC",
+      "middleName": "Industries",
+      "lastName": "PLC",
+      "dateOfBirth": "2005-07-20T00:00:00",
+      "gender": "female",
+      "citizen": "Ethiopian",
+      "registrationDate": "2022-09-18T00:00:00",
+      "category": "Category B",
+      "status": "Active",
+      "region": "Oromia",
+      "city": "Adama",
+      "woreda": "04",
+      "kebele": "08"
+    }
+  ]
+}
