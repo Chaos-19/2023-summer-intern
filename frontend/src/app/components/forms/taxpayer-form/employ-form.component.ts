@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { InputType } from '../../../tpes';
 import { ImageUploaderComponent } from '../../ui/image-uploader/image-uploader.component';
+import { TaxpayerService } from '../../../core/services/tax-payer.service';
 
 
 @Component({
@@ -40,6 +41,8 @@ import { ImageUploaderComponent } from '../../ui/image-uploader/image-uploader.c
 })
 export class EmployFormComponent {
   empform: FormGroup;
+
+   taxPayerservice = inject(TaxpayerService)
 
   genders: InputType[] = [
     { value: 'male-0', viewValue: 'male' },
@@ -101,18 +104,13 @@ export class EmployFormComponent {
     this.empform = this._fb.group({
       taxpayertype: ['', Validators.required],
       tin: ['', Validators.required],
-      foldernumber: ['', Validators.required],
       assesmenttype: ['', Validators.required],
       firstname: ['', Validators.required],
       middlename: ['', Validators.required],
       lastname: ['', Validators.required],
-      fnenglish: ['', Validators.required],
       dob: ['', Validators.required],
       gender: ['', Validators.required],
       citizen: ['', Validators.required],
-      mothername: ['', Validators.required],
-      mfname: ['', Validators.required],
-      mgfname: ['', Validators.required],
       regdate: [''],
       catagory: ['', Validators.required],
       status: ['', Validators.required],
@@ -125,8 +123,16 @@ export class EmployFormComponent {
 
   onFormSubsmit() {
     if (this.empform.valid) {
-      console.log(this.empform.value);
+      this.taxPayerservice.createTaxpayer(this.empform.value).subscribe({
+        next(value) {
+         console.log()
+        },
+     error: (err:any)=>console.error('errror',err)
+        
+      })
     }
+
+    alert('it works')
   }
 
   onRegionSelectionChange(event: MatSelectChange) {
