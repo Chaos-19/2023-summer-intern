@@ -16,7 +16,6 @@ import { InputType } from '../../../tpes';
 import { ImageUploaderComponent } from '../../ui/image-uploader/image-uploader.component';
 import { TaxpayerService } from '../../../core/services/tax-payer.service';
 
-
 @Component({
   selector: 'app-employ-form',
   standalone: true,
@@ -42,11 +41,11 @@ import { TaxpayerService } from '../../../core/services/tax-payer.service';
 export class EmployFormComponent {
   empform: FormGroup;
 
-   taxPayerservice = inject(TaxpayerService)
+  taxPayerservice = inject(TaxpayerService);
 
   genders: InputType[] = [
-    { value: 'male-0', viewValue: 'male' },
-    { value: 'female-1', viewValue: 'female' },
+    { value: 'male', viewValue: 'male' },
+    { value: 'female', viewValue: 'female' },
   ];
 
   citizenships: InputType[] = [
@@ -91,8 +90,8 @@ export class EmployFormComponent {
   ];
 
   taxpayertypes: InputType[] = [
-    { value: 'Individual-0', viewValue: 'Individual' },
-    { value: 'company-1', viewValue: 'company' },
+    { value: 'individual', viewValue: 'Individual' },
+    { value: 'company', viewValue: 'company' },
   ];
 
   assesementtypes: InputType[] = [
@@ -102,7 +101,7 @@ export class EmployFormComponent {
 
   constructor(private _fb: FormBuilder) {
     this.empform = this._fb.group({
-      taxpayertype: ['', Validators.required],
+      TaxpayerType : ['', Validators.required],
       tin: ['', Validators.required],
       assesmenttype: ['', Validators.required],
       firstname: ['', Validators.required],
@@ -123,16 +122,16 @@ export class EmployFormComponent {
 
   onFormSubsmit() {
     if (this.empform.valid) {
-      this.taxPayerservice.createTaxpayer(this.empform.value).subscribe({
-        next(value) {
-         console.log()
-        },
-     error: (err:any)=>console.error('errror',err)
-        
-      })
-    }
+      console.log(this.empform.value);
 
-    alert('it works')
+      this.taxPayerservice.createTaxpayer(this.empform.value).subscribe({
+        next: (value) => {
+          console.log(value);
+        },
+        error: (err: any) => console.error('errror', err),
+        complete: () => console.log('Requested completed'),
+      });
+    }
   }
 
   onRegionSelectionChange(event: MatSelectChange) {

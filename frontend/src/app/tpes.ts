@@ -11,6 +11,7 @@ export interface InputType {
 }
 
 export interface TaxPayer {
+  taxPayerId?:number;
   taxpayerType: 'individual' | 'company';
   tin: number;
   assesmentType: 'hisamezgeb' | 'kurtGiber';

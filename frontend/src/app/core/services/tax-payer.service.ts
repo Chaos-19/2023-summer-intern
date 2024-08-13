@@ -4,13 +4,12 @@ import * as rxjs from 'rxjs';
 import { TaxPayer } from '../../tpes';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TaxpayerService {
+  private apiUrl = 'http://localhost:5209/api/taxPayer/TaxPayer'; //http://localhost:5209/api/taxPayer/TaxPayer/CreateTaxPayer
 
-  private apiUrl = 'https://localhost:7010/api/TaxPayer'; 
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   GetAllTaxpayer(): rxjs.Observable<TaxPayer[]> {
     return this.http.get<TaxPayer[]>(this.apiUrl);
@@ -21,7 +20,13 @@ export class TaxpayerService {
   }
 
   createTaxpayer(taxpayer: TaxPayer): rxjs.Observable<TaxPayer> {
-    return this.http.post<TaxPayer>(`${this.apiUrl}/CreateTaxpayer`, taxpayer);
+    console.log('Requesting');
+    console.log(taxpayer);
+
+    return this.http.post<TaxPayer>(`${this.apiUrl}/CreateTaxpayer`, {
+      ...taxpayer,
+      taxPayerId: 0,
+    });
   }
 
   UpdateTaxpayer(tin: number, taxpayer: TaxPayer): rxjs.Observable<void> {
