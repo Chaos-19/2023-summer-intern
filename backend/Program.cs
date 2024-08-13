@@ -15,6 +15,19 @@ namespace TaxPayerApi
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(
+                    "AllowSpecificOrigin",
+                    policy =>
+                    {
+                        policy
+                            .WithOrigins("http://localhost:4200") // Removed the trailing slash
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                    }
+                );
+            });
 
             builder.Services.AddDbContext<TaxPayerDbContext>(options =>
             {
@@ -35,6 +48,8 @@ namespace TaxPayerApi
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowSpecificOrigin");
 
             app.UseAuthorization();
 
