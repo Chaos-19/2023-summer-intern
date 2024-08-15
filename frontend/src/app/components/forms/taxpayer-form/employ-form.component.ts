@@ -43,7 +43,7 @@ export class EmployFormComponent {
 
   taxPayerservice = inject(TaxpayerService);
 
-  genders: InputType[] = [
+  gender: InputType[] = [
     { value: 'male', viewValue: 'male' },
     { value: 'female', viewValue: 'female' },
   ];
@@ -101,16 +101,16 @@ export class EmployFormComponent {
 
   constructor(private _fb: FormBuilder) {
     this.empform = this._fb.group({
-      TaxpayerType : ['', Validators.required],
+      taxpayerType: ['', Validators.required],
       tin: ['', Validators.required],
-      assesmenttype: ['', Validators.required],
-      firstname: ['', Validators.required],
+      assesmentType: ['', Validators.required],
+      firstName: ['', Validators.required],
       middlename: ['', Validators.required],
-      lastname: ['', Validators.required],
-      dob: ['', Validators.required],
+      lastName: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
       gender: ['', Validators.required],
       citizen: ['', Validators.required],
-      regdate: [''],
+      registrationDate: [''],
       catagory: ['', Validators.required],
       status: ['', Validators.required],
       region: ['', Validators.required],
