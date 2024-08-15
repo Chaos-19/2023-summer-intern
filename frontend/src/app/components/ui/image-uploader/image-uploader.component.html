@@ -20,11 +20,11 @@
     <div *ngIf="imageName()">
       <div *ngIf="selectedFile || imagePreview">
         <img [src]="imagePreview()" alt="Image Preview" class="image-preview" />
-        <p>
+        <!--  <p>
           <span class="image-name">{{ imageName() }}</span> ({{ fileSize() }}
           KB)
         </p>
-        <mat-icon class="delete-icon" (click)="removeImage()">delete</mat-icon>
+        <mat-icon class="delete-icon" (click)="removeImage()">delete</mat-icon> -->
       </div>
     </div>
   </div>

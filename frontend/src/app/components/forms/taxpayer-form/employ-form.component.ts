@@ -32,7 +32,6 @@ import { TaxpayerService } from '../../../core/services/tax-payer.service';
     ReactiveFormsModule,
     MatDialogModule,
     ReactiveFormsModule,
-
     ImageUploaderComponent,
   ],
   templateUrl: './employ-form.component.html',
@@ -105,13 +104,13 @@ export class EmployFormComponent {
       tin: ['', Validators.required],
       assesmentType: ['', Validators.required],
       firstName: ['', Validators.required],
-      middlename: ['', Validators.required],
+      middleName: ['', Validators.required],
       lastName: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       gender: ['', Validators.required],
       citizen: ['', Validators.required],
       registrationDate: [''],
-      catagory: ['', Validators.required],
+      category: ['', Validators.required],
       status: ['', Validators.required],
       region: ['', Validators.required],
       city: ['', Validators.required],
@@ -121,6 +120,7 @@ export class EmployFormComponent {
   }
 
   onFormSubsmit() {
+    console.log(this.empform.value);
     if (this.empform.valid) {
       console.log(this.empform.value);
 
@@ -129,7 +129,7 @@ export class EmployFormComponent {
           console.log(value);
         },
         error: (err: any) => console.error('errror', err),
-        complete: () => console.log('Requested completed'),
+        complete: () => console.log('NEW TaxPa completed'),
       });
     }
   }
