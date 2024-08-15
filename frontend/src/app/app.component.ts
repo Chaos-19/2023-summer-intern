@@ -29,7 +29,7 @@ export class AppComponent {
     this.taxpayerService.GetAllTaxpayer().subscribe({
       next: (res) => {
         this.list = res;
-        console.log(res);
+        console.log(res)
       },
       error: (err: any) => console.error('Error occurred:', err),
       complete: () => console.log('Request completed'),

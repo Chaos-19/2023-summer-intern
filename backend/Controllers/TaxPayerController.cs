@@ -39,12 +39,11 @@ namespace TaxPayerApi.Controller
         //api/taxPayer/create
         [Route("CreateTaxPayer")]
         [HttpPost]
-        public async Task<IActionResult> CreateTaxPayer([FromForm] TaxPayer newTaxPayer)
+        public async Task<IActionResult> CreateTaxPayer(TaxPayer newTaxPayer)
         {
             var taxPayer = await _context.TaxPayer.FirstOrDefaultAsync(p =>
                 p.Tin == newTaxPayer.Tin
             );
-            Console.WriteLine("Add Neew");
             if (taxPayer != null)
                 return BadRequest("Account Already Exists"); 
 
@@ -61,7 +60,7 @@ namespace TaxPayerApi.Controller
         //api/taxPayer/update
         [Route("UpdateTaxPayer/{id}")]
         [HttpPut]
-        public async Task<IActionResult> UpdateTaxPayer(int id, [FromForm] TaxPayer taxPayer)
+        public async Task<IActionResult> UpdateTaxPayer(int id, TaxPayer taxPayer)
         {
             if (id != taxPayer.TaxPayerId)
                 return BadRequest("Id should be Matched");

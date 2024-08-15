@@ -24,8 +24,8 @@ export class TaxpayerService {
     console.log(taxpayer);
 
     return this.http.post<TaxPayer>(`${this.apiUrl}/CreateTaxpayer`, {
+      TaxPayerId: 0,
       ...taxpayer,
-      taxPayerId: 0,
     });
   }
 
