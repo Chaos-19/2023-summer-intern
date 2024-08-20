@@ -53,7 +53,7 @@
                 <mat-label>TIN</mat-label>
                 <input matInput formControlName="tin" type="number" />
               </mat-form-field>
-              <button mat-button>
+              <button type="button" mat-button (click)="generateTIN()">
                 <mat-icon
                   aria-hidden="false"
                   aria-label="generate icon"

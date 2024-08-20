@@ -16,10 +16,17 @@ import { InputType } from '../../../tpes';
 import { ImageUploaderComponent } from '../../ui/image-uploader/image-uploader.component';
 import { TaxpayerService } from '../../../core/services/tax-payer.service';
 
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {
+  MatButtonToggleChange,
+  MatButtonToggleModule,
+} from '@angular/material/button-toggle';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 
 import { DomSanitizer } from '@angular/platform-browser';
+import { customAlphabet } from 'nanoid';
+
+// Define a custom alphabet (only numbers)
+const nanoid = customAlphabet('0123456789', 10); // 10 is the length of the ID
 
 const RELOAD_ICON =
   `
@@ -176,5 +183,13 @@ export class EmployFormComponent {
       value: event.value,
       viewValue: event.value,
     })) as InputType[];
+  }
+
+  generateTIN() {
+    const uniqueId = nanoid();
+
+    this.empform.patchValue({
+      tin: Number(uniqueId),
+    });
   }
 }
