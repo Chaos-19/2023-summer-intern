@@ -16,7 +16,11 @@
 }
 
 .card-content {
-  padding: 15px 20px;
+  padding: 35px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
 }
 .content {
   display: flex;
@@ -37,4 +41,19 @@
 .first-row {
   flex-wrap: nowrap;
   align-items: center;
+}
+.action-btns {
+  border-radius: 2px;
+}
+.card-content {
+  padding: 40px 20px;
+}
+
+.img-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.float {
+  align-self: flex-start;
 }

@@ -4,8 +4,74 @@
       <div>
         <h6>EmployeeForm</h6>
       </div>
+      <div class="">
+        <mat-button-toggle-group
+          name="favoriteColor"
+          aria-label="Axction to take"
+          class="action-btns"
+          [hideSingleSelectionIndicator]="true"
+        >
+          <mat-button-toggle value="red">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Add new icon"
+              fontIcon="add"
+            ></mat-icon>
+            New
+          </mat-button-toggle>
+          <mat-button-toggle value="green">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="save icon"
+              fontIcon="save"
+            ></mat-icon>
+            Save
+          </mat-button-toggle>
+          <mat-button-toggle value="blue">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="delete icon"
+              fontIcon="delete"
+            ></mat-icon>
+            Delete
+          </mat-button-toggle>
+          <mat-button-toggle value="blue">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Search icon"
+              fontIcon="search"
+            ></mat-icon>
+            Search
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
       <form [formGroup]="empform" (ngSubmit)="onFormSubsmit()" class="my-form">
         <div mat-dialog-content class="content">
+          <div class="img-row">
+            <div class="row">
+              <mat-form-field appearance="outline">
+                <mat-label>TIN</mat-label>
+                <input matInput formControlName="tin" type="number" />
+              </mat-form-field>
+              <button mat-button>
+                <mat-icon
+                  aria-hidden="false"
+                  aria-label="generate icon"
+                  fontIcon="generate"
+                ></mat-icon>
+              </button>
+              <button mat-button>
+                <mat-icon
+                  aria-hidden="false"
+                  aria-label="Add new icon"
+                  fontIcon="search"
+                ></mat-icon>
+              </button>
+            </div>
+            <div class="float">
+              <app-image-uploader />
+            </div>
+          </div>
           <div class="first-row">
             <div class="row">
               <mat-form-field appearance="outline" class="example-form-field">
@@ -17,10 +83,6 @@
                   }}</mat-option>
                   }
                 </mat-select>
-              </mat-form-field>
-              <mat-form-field appearance="outline">
-                <mat-label>TIN</mat-label>
-                <input matInput formControlName="tin" type="number" />
               </mat-form-field>
               <!--
               <mat-form-field appearance="outline">
@@ -39,7 +101,6 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <app-image-uploader />
           </div>
           <div class="row">
             <mat-form-field appearance="outline">
