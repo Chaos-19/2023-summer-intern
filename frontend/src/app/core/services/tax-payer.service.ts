@@ -7,7 +7,7 @@ import { TaxPayer } from '../../tpes';
   providedIn: 'root',
 })
 export class TaxpayerService {
-  private apiUrl = 'http://localhost:5209/api/taxPayer/TaxPayer'; //http://localhost:5209/api/taxPayer/TaxPayer/CreateTaxPayer
+  private apiUrl = 'http://localhost:5209/api/TaxPayer';
 
   constructor(private http: HttpClient) {}
 
@@ -30,10 +30,13 @@ export class TaxpayerService {
   }
 
   UpdateTaxpayer(tin: number, taxpayer: TaxPayer): rxjs.Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${tin}`, taxpayer);
+    return this.http.put<void>(
+      `${this.apiUrl}/UpdateTaxPayer/${tin}`,
+      taxpayer
+    );
   }
 
   DeleteTaxpayer(tin: number): rxjs.Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${tin}`);
+    return this.http.delete<void>(`${this.apiUrl}/DeleteTaxPayer/${tin}`);
   }
 }

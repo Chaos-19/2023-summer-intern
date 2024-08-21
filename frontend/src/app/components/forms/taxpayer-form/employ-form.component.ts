@@ -12,7 +12,7 @@ import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { InputType } from '../../../tpes';
+import { InputType, TaxPayer } from '../../../tpes';
 import { ImageUploaderComponent } from '../../ui/image-uploader/image-uploader.component';
 import { TaxpayerService } from '../../../core/services/tax-payer.service';
 
@@ -24,6 +24,7 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 
 import { DomSanitizer } from '@angular/platform-browser';
 import { customAlphabet } from 'nanoid';
+import { regions } from '../../../constant';
 
 // Define a custom alphabet (only numbers)
 const nanoid = customAlphabet('0123456789', 10); // 10 is the length of the ID
@@ -64,6 +65,7 @@ const RELOAD_ICON =
 export class EmployFormComponent {
   empform: FormGroup;
   taxPayerservice = inject(TaxpayerService);
+  currentTaxPayerInfo!: TaxPayer;
 
   gender: InputType[] = [
     { value: 'male', viewValue: 'male' },
@@ -87,29 +89,16 @@ export class EmployFormComponent {
     { value: 'closed-3', viewValue: 'closed' },
   ];
   rigons: InputType[] = [
-    { value: 'AddisAbaba-0', viewValue: 'AddisAbaba' },
-    { value: 'Amhara-1', viewValue: 'Amhara' },
-    { value: 'Oromia-2', viewValue: 'Oromia' },
-    { value: 'Tigray-3', viewValue: 'Tigray' },
+    { value: 'addisAbaba', viewValue: 'AddisAbaba' },
+    { value: 'amhara', viewValue: 'Amhara' },
+    { value: 'oromia', viewValue: 'Oromia' },
+    { value: 'tigray', viewValue: 'Tigray' },
+    { value: 'snnpr', viewValue: 'SNNP' },
+    { value: 'somali', viewValue: 'Somali' },
   ];
-  cities: InputType[] = [
-    { value: 'AddisAbaba-0', viewValue: 'AddisAbaba' },
-    { value: 'Baherdar-1', viewValue: 'Baherdar' },
-    { value: 'Debreziet-2', viewValue: 'Debreziet' },
-    { value: 'Nazret-3', viewValue: 'Nazret' },
-  ];
-  woredas: InputType[] = [
-    { value: 'Bole-0', viewValue: 'Bole' },
-    { value: 'Yeka-1', viewValue: 'Yeka' },
-    { value: 'NifasSilk-2', viewValue: 'NifasSilk' },
-  ];
-
-  kebeles: InputType[] = [
-    { value: '01-0', viewValue: '01' },
-    { value: '11-1', viewValue: '11' },
-    { value: '12-2', viewValue: '12' },
-    { value: '13-3', viewValue: '13' },
-  ];
+  cities: InputType[] = [...regions['addisAbaba'].cities];
+  woredas: InputType[] = [...regions['addisAbaba'].woredas];
+  kebeles: InputType[] = [...regions['addisAbaba'].kebeles];
 
   taxpayertypes: InputType[] = [
     { value: 'individual', viewValue: 'Individual' },
@@ -157,10 +146,11 @@ export class EmployFormComponent {
     console.log(this.empform.value);
     if (this.empform.valid) {
       console.log(this.empform.value);
-
+      this.currentTaxPayerInfo = this.empform.value;
       this.taxPayerservice.createTaxpayer(this.empform.value).subscribe({
         next: (value) => {
           console.log(value);
+          this.currentTaxPayerInfo = value;
         },
         error: (err: any) => console.error('errror', err),
         complete: () => console.log('NEW TaxPa completed'),
@@ -171,18 +161,9 @@ export class EmployFormComponent {
   onRegionSelectionChange(event: MatSelectChange) {
     console.log(event.value); // This will log the value of the selected item.
 
-    this.cities = Array.from({ length: 10 }).map((v) => ({
-      value: event.value,
-      viewValue: event.value,
-    })) as InputType[];
-    this.woredas = Array.from({ length: 10 }).map((v) => ({
-      value: event.value,
-      viewValue: event.value,
-    })) as InputType[];
-    this.kebeles = Array.from({ length: 10 }).map((v) => ({
-      value: event.value,
-      viewValue: event.value,
-    })) as InputType[];
+    this.cities = regions[event.value].cities as InputType[];
+    this.woredas = regions[event.value].woredas as InputType[];
+    this.kebeles = regions[event.value].kebeles as InputType[];
   }
 
   generateTIN() {
@@ -191,5 +172,50 @@ export class EmployFormComponent {
     this.empform.patchValue({
       tin: Number(uniqueId),
     });
+  }
+
+  searchTaxPayer() {
+    const tinNo = this.empform.get('tin')?.value;
+    this.taxPayerservice.GetTaxPayer(tinNo).subscribe({
+      next: (resp) => {
+        this.empform.patchValue({
+          ...resp,
+        });
+        this.currentTaxPayerInfo = resp;
+      },
+      error: (error) => console.log(error),
+      complete: () => console.log('request completed'),
+    });
+    console.log(tinNo);
+  }
+
+  deleteTaxPayer() {
+    const tinNo = this.empform.get('tin')?.value;
+
+    this.taxPayerservice.DeleteTaxpayer(tinNo).subscribe({
+      next: (resp) => {
+        console.log(resp);
+
+        //this.empform.reset();
+      },
+      error: (error) => console.log(error),
+      complete: () => console.log('request completed'),
+    });
+  }
+  updateTaxPayer() {
+    const tinNo = this.empform.get('tin')?.value;
+
+    this.taxPayerservice
+      .UpdateTaxpayer(tinNo, {
+        ...this.currentTaxPayerInfo,
+        ...this.empform.value,
+      })
+      .subscribe({
+        next: (resp) => {
+          alert(resp);
+        },
+        error: (error) => console.log(error),
+        complete: () => console.log('request completed'),
+      });
   }
 }

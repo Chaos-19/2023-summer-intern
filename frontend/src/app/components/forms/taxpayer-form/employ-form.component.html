@@ -11,7 +11,7 @@
           class="action-btns"
           [hideSingleSelectionIndicator]="true"
         >
-          <mat-button-toggle value="red">
+          <mat-button-toggle value="red" (click)="onFormSubsmit()">
             <mat-icon
               aria-hidden="false"
               aria-label="Add new icon"
@@ -19,7 +19,7 @@
             ></mat-icon>
             New
           </mat-button-toggle>
-          <mat-button-toggle value="green">
+          <mat-button-toggle value="green" (click)="updateTaxPayer()">
             <mat-icon
               aria-hidden="false"
               aria-label="save icon"
@@ -27,7 +27,7 @@
             ></mat-icon>
             Save
           </mat-button-toggle>
-          <mat-button-toggle value="blue">
+          <mat-button-toggle value="blue" (click)="deleteTaxPayer()">
             <mat-icon
               aria-hidden="false"
               aria-label="delete icon"
@@ -35,7 +35,7 @@
             ></mat-icon>
             Delete
           </mat-button-toggle>
-          <mat-button-toggle value="blue">
+          <mat-button-toggle value="blue" (click)="searchTaxPayer()">
             <mat-icon
               aria-hidden="false"
               aria-label="Search icon"
@@ -60,7 +60,7 @@
                   fontIcon="generate"
                 ></mat-icon>
               </button>
-              <button mat-button>
+              <button type="button" mat-button (click)="searchTaxPayer()">
                 <mat-icon
                   aria-hidden="false"
                   aria-label="Add new icon"
@@ -240,13 +240,13 @@
           </div>
           <div class="row"></div>
         </div>
-        <div
+        <!--  <div
           mat-dialog-action
           style="display: flex; align-items: center; gap: 8px"
         >
           <button mat-raised-button color="primary">Cancel</button>
           <button mat-raised-button type="submit">Save</button>
-        </div>
+        </div> -->
       </form>
     </div>
   </mat-card>
