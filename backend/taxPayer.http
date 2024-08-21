@@ -1,0 +1,64 @@
+@taxPayer_HostAddress = http://localhost:5209/api/TaxPayer
+
+GET {{taxPayer_HostAddress}}
+Accept: application/json
+
+###
+
+GET {{taxPayer_HostAddress}}/5397630098
+Accept: application/json
+
+###
+
+POST {{taxPayer_HostAddress}}/CreateTaxPayer
+Content-Type: application/json
+
+{
+    "taxpayerType": "company",
+    "tin": 7866609,
+    "assesmentType": "kurtGiber",
+    "firstName": "ABC",
+    "middleName": "Industries",
+    "lastName": "PLC",
+    "dateOfBirth": "2005-07-20T00:00:00",
+    "gender": "female",
+    "citizen": "Ethiopian",
+    "registrationDate": "2022-09-18T00:00:00",
+    "category": "Category B",
+    "status": "Active",
+    "region": "Oromia",
+    "city": "Adama",
+    "woreda": "04",
+    "kebele": "08"
+}
+
+###
+
+PUT {{taxPayer_HostAddress}}/UpdateTaxPayer/7866609
+Content-Type: application/json
+
+{
+    "TaxPayerId":6,
+    "taxpayerType": "company",
+    "tin": 7866609,
+    "assesmentType": "kurtGiber",
+    "firstName": "Update",
+    "middleName": "Update 111",
+    "lastName": "Update 111",
+    "dateOfBirth": "2005-07-20T00:00:00",
+    "gender": "female",
+    "citizen": "Ethiopian",
+    "registrationDate": "2022-09-18T00:00:00",
+    "category": "Category B",
+    "status": "Active",
+    "region": "Addis",
+    "city": "addis",
+    "woreda": "14",
+    "kebele": "18"
+}
+
+###
+
+DELETE {{taxPayer_HostAddress}}/DeleteTaxPayer/7866609
+
+###

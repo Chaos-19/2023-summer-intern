@@ -6,7 +6,7 @@ using TaxPayerApi.Models;
 
 namespace TaxPayerApi.Controller
 {
-    [Route("api/taxPayer/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class TaxPayerController : ControllerBase
     {
@@ -24,11 +24,11 @@ namespace TaxPayerApi.Controller
             return await _context.TaxPayer.ToListAsync();
         }
 
-        //api/taxPayer/:id
+        //api/taxPayer/:TIn
         [HttpGet("{tin}")]
-        public async Task<ActionResult<TaxPayer>> GetTaxPayerByTin(int tin)
+        public async Task<ActionResult<TaxPayer>> GetTaxPayerByTin(long tin)
         {
-            var taxPayer = await _context.TaxPayer.FindAsync(tin);
+            var taxPayer = await _context.TaxPayer.FirstOrDefaultAsync(p => p.Tin == tin);
 
             if (taxPayer == null)
                 return NotFound();
@@ -45,7 +45,7 @@ namespace TaxPayerApi.Controller
                 p.Tin == newTaxPayer.Tin
             );
             if (taxPayer != null)
-                return BadRequest("Account Already Exists"); 
+                return BadRequest("Account Already Exists");
 
             _context.TaxPayer.Add(newTaxPayer);
             await _context.SaveChangesAsync();
@@ -57,25 +57,20 @@ namespace TaxPayerApi.Controller
             );
         }
 
-        //api/taxPayer/update
-        [Route("UpdateTaxPayer/{id}")]
+        //api/taxPayer/update/TIn
+        [Route("UpdateTaxPayer/{tin}")]
         [HttpPut]
-        public async Task<IActionResult> UpdateTaxPayer(int id, TaxPayer taxPayer)
+        public async Task<IActionResult> UpdateTaxPayer(int tin, TaxPayer taxPayer)
         {
-            if (id != taxPayer.TaxPayerId)
+            if (tin != taxPayer.Tin)
                 return BadRequest("Id should be Matched");
 
-            var existTaxPayer = await _context.TaxPayer.FindAsync(id);
+            var existTaxPayer = await _context.TaxPayer.FirstOrDefaultAsync(p => p.Tin == tin);
 
             if (existTaxPayer == null)
                 return NotFound();
 
             _context.TaxPayer.Attach(existTaxPayer);
-
-            /*  foreach (var item in taxPayer)
-             {
-                 existTaxPayer.Items.Add(item);
-             } */
             // Use reflection to update properties
             this.UpdateProperties(taxPayer, existTaxPayer);
 
@@ -83,12 +78,12 @@ namespace TaxPayerApi.Controller
             return NoContent();
         }
 
-        //api/taxPayer/delete
-        [Route("DeleteTaxPayer/{id}")]
+        //api/taxPayer/delete/Tin
+        [Route("DeleteTaxPayer/{tin}")]
         [HttpDelete]
-        public async Task<IActionResult> DeleteTaxPayer(int id)
+        public async Task<IActionResult> DeleteTaxPayer(int tin)
         {
-            var taxPayer = await _context.TaxPayer.FindAsync(id);
+            var taxPayer = await _context.TaxPayer.FirstOrDefaultAsync(p => p.Tin == tin);
 
             if (taxPayer == null)
                 return BadRequest();
