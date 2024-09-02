@@ -7,7 +7,7 @@ import { TaxPayer } from '../../tpes';
   providedIn: 'root',
 })
 export class TaxpayerService {
-  private apiUrl = 'http://localhost:5209/api/TaxPayer';
+  private apiUrl = "https://super-duper-space-giggle-gj6q9vqq66gfw4pj-5209.app.github.dev/api/TaxPayer"//'http://localhost:5209/api/TaxPayer';
 
   constructor(private http: HttpClient) {}
 

@@ -5,7 +5,7 @@ Accept: application/json
 
 ###
 
-GET {{taxPayer_HostAddress}}/5397630098
+GET {{taxPayer_HostAddress}}/7866608
 Accept: application/json
 
 ###
@@ -15,13 +15,13 @@ Content-Type: application/json
 
 {
     "taxpayerType": "company",
-    "tin": 7866609,
+    "tin": 7866608,
     "assesmentType": "kurtGiber",
-    "firstName": "ABC",
-    "middleName": "Industries",
-    "lastName": "PLC",
+    "firstName": "Test",
+    "middleName": "Test Data",
+    "lastName": "Test LastName",
     "dateOfBirth": "2005-07-20T00:00:00",
-    "gender": "female",
+    "gender": "male",
     "citizen": "Ethiopian",
     "registrationDate": "2022-09-18T00:00:00",
     "category": "Category B",
@@ -38,7 +38,7 @@ PUT {{taxPayer_HostAddress}}/UpdateTaxPayer/7866609
 Content-Type: application/json
 
 {
-    "TaxPayerId":6,
+    "TaxPayerId":1,
     "taxpayerType": "company",
     "tin": 7866609,
     "assesmentType": "kurtGiber",

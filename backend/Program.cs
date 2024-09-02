@@ -1,5 +1,7 @@
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using TaxPayerApi.Models;
+
 
 namespace TaxPayerApi
 {
@@ -22,7 +24,7 @@ namespace TaxPayerApi
                     policy =>
                     {
                         policy
-                            .WithOrigins("http://localhost:4200") // Removed the trailing slash
+                            .WithOrigins("https://super-duper-space-giggle-gj6q9vqq66gfw4pj-4200.app.github.dev") // Removed the trailing slash
                             .AllowAnyMethod()
                             .AllowAnyHeader();
                     }
@@ -31,12 +33,13 @@ namespace TaxPayerApi
 
             builder.Services.AddDbContext<TaxPayerDbContext>(options =>
             {
-                /*options.UseSqlServer(
-                    builder.Configuration.GetConnectionString("DefaultConnection")
-                );*/
-                options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
-                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                 options.UseMySql(builder.Configuration.GetConnectionString("DBConn"), new MySqlServerVersion(new Version(8, 0, 30)));
+
+                //options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
+           
+           
+
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
