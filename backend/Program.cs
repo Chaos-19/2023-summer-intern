@@ -31,9 +31,10 @@ namespace TaxPayerApi
 
             builder.Services.AddDbContext<TaxPayerDbContext>(options =>
             {
-                options.UseSqlServer(
+                /*options.UseSqlServer(
                     builder.Configuration.GetConnectionString("DefaultConnection")
-                );
+                );*/
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
             builder.Services.AddSwaggerGen();
